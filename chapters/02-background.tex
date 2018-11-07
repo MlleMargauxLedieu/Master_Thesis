@@ -1,0 +1,259 @@
+\chapter{Background}
+\label{chp:background}
+
+In this chapter we provide a brief discussion of the essential background needed throughout the thesis. See e.g., \cite{Cover2006}.
+
+
+\section{Geology}
+The search for hydrocarbons - oil and gas - is concentrated within the upper crust of the Earth which spreads from 0 to 40km. It's made of 12 tectonic plates that drifts away from each other. As they move, the plates interact at their extremities: creating and destroying material. Through this process, minerals go through different phases (liquid, solid) and are combined with a range of other minerals creating different rock types: it is the rock cycle. 
+	\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-rock-cycle}
+        \caption{The rock cycle}\label{fig:rock-cycle}
+    \end{figure}
+
+Those cycles form hydrocarbon source rocks, reservoir and seals. The movement of the plates also introduces non-linearity in the rocks where oil or gas can be trapped. Those structural traps are where we usually drill from. As we see in red on Figure~\ref{fig:rock-cycle}, there are three types of rocks: igneous, sedimentary and metamorphic.  Igneous rocks are formed through the cooling of minerals from magma. Metamorphic rocks are generated through the burial process of rocks: as rocks are buried, they are exposed to higher temperature and pressure transforming organic matter into oil and gas. Sedimentary rocks accounts for almost all oil and gas reserve. They are deposited in layers, reflecting the history of the depositional basin.
+
+
+The hydrocarbon formation process has several steps: first the maturation where organic matter is buried and exposed to such temperature and pressure conditions that it converts into oil or gas. The second part of the process is called migration, it is when the hydrocarbon moves from the source rocks to the reservoir. At high temperature the oil has a lower density allowing it to moves upwards through fractures in the source rocks and the reservoir rocks. At even higher temperature, the oil is dissolved into gas phase. Then when it moves upwards, the pressure decreases causing it to condensate back to liquid form. The hydrocarbon is then trapped in the reservoir rock. The trap in which it lays should ideally be impermeable (no fluid can flow through it) but an escape rate smaller than the production rate is sufficient for the trap to be commercially viable. 
+
+Only a portion of this volume of hydrocarbon can be extracted. The amount depends on several factors such as porosity, permeability, lithology, components...  The following sections present some of those properties. 
+\subsection{Dunham Classification}
+The Duhnam classification was developed to classify carbonate sedimentary rocks. The class names are based on the depositional texture. This means that the classification is most significant for interpreting the depositional environment of the rocks. The Dunham classification, see Figure~\ref{fig:dunham}, is based on three criteria: The supporting fabric of the original sediment: mud, grain ?, The presence or absence of mud. Were the original components bound during deposition ?
+Those criteria lead to 4 classes :
+\begin{itemize}
+    \item Mudstone: mud-supported carbonate rock with less than 10\% grain.
+    \item Wackestone: mud-supported carbonate rock with more than 10\% grain.
+    \item Packstone: grain-supported carbonate rock with more than 1\% mud.
+    \item Grainstone: grain-supported carbonate rock with less than 1\% mud.
+	\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-Dunhams-classification}
+        \caption{Dunham Classifiaction of carbonate rocks}\label{fig:dunham}
+    \end{figure}
+\end{itemize}
+
+Maybe add one or two sentences about why duhnam classification is interesting ?
+
+\subsection{Porosity and permeability}
+The porosity of a rock is a measure of its ability to hold fluids. This is a relevant property for reservoir rocks since it will tell how much oil they can contain. Mathematically,  we calculate the porosity by dividing the volume of open spaces in the rock by the total volume of the rock. Porosity is expressed by a number between 0 and 1. If the porosity is 0, then the rock can't hold any fluid. 
+ 
+There are two kinds of porosity:
+\begin{itemize}
+    \item Total porosity: it includes all void spaces regardless of whether the pores are connected or isolated.
+    \item Effective porosity: it's the fraction of the total volume in which fluid effectively flows. It includes dead-ends pores but excludes non-connected pores. This is the porosity that is most relevant in petroleum studies. 
+\end{itemize}
+
+The permeability of a rock describes how easily liquid can flow through it. It is an important property for the source rocks since hydrocarbon flows through them during the migration process. But it is also important for reservoir rock since if there is low permeability, the oil contained in the pores won't be able to flow out of the rock. 
+Rocks that are considered good reservoirs combine good porosity and permeability. A rock with high porosity and high permeability will make a good reservoir rock since it can hold and deliver large amounts of oil. 
+
+I voluntarily chose to ignore DR and Components since I am not allowed to talk about which components are present in my rocks. But maybe I'll be allowed to talk about description of which can be found and what they could indicate without telling how much of each I find every time. 
+
+\subsection{Coring}
+The first step to determine where to drill is the seismic study. A big 'bang' sends wave sounds that propagates into the earth and are partially reflected by the different rock layers. Those wave sounds are gathered registered and stored by geophones placed on the surface. This operation is repeated several times in different places and the data gathered then creates a seismic images that can be interpreted by geologists to identify and target zones with high chances of finding oil. 
+
+Then, a whole is drilled and a sensor is lowered to the bottom of the well and measures are taken. Several instruments are used such as gamma ray that gives information about the level of clay, resistivity which indicates potential hydrocarbon sources or sonic which indicates porosity of the rock. But the best way to identify what kind of rocks are drilled through is coring. This operation consists in drilling very slowly with a special drilling bit and extract a piece of the rock which looks like a tube. Then a resine is infiltrated through the core to make sure it holds and all the fragments stick together when we cut through it. 
+This technique is costly since it takes days out of the normal drilling process and it can be very slow. It is also not 100\% reliable: there can be gaps in the core, it can collapse or sometimes not manage to extract the core at all. 
+If the operation is successful, high resolution pictures of the core are taken. Then thin sections are cut from it and labelled by geologists. The outcome is a precise description of the rock the exploration is drilling through.  
+
+\section{Convolutional Neural Networks}
+Add one sentence about the fact that CNNs are what is almost unanimously claimed tobe the best way of doing computer vision and image classification.
+A Convolutional Neural Network (CNN) is a network that makes the explicit assumption that its inputs are images. Thus, one can encode some properties into the architecture of the network. One of them is that nearby pixels are more correlated than distant pixels. This allows the network to extract local features dependant only on small sub-regions of the image, resulting in a vastly reduced number of parameters. 
+A CNN consists of three basic layers.  In the first layer, several linear operations are performed in parallel producing a set of linear activation: it's the convolution layer. The second layer is the activation layer: the activation function is applied to the linear activation. This will produce a feature map representing the local features that were detected in the previous stage. The third layer is the pooling layer, this reduces the number of parameters to increase efficiency and produces a feature map. Finally, one can add a last layer: the fully connected layer, it will use the extracted features to classify the images into classes. 
+
+\subsection{Convolution Layer}
+This one might be a bit too complex...
+The convolution is performed on the input data by a filter or kernel to produce a feature map. We proceed to the convolution by sliding the filter over the input. The first convolution will be between the first filter and the top right part of the image: a matrix multiplication is performed and the sum is written on the feature map. Each filter is trained to identify a certain feature and it will detect it everywhere on the image.  Numerous convolutions are performed using different kernels and producing several feature map.
+	
+	Now an example of how the feature maps are calculated. On Figure~\ref{fig:conv_layer}, the blue 3x3 matrix is the filter and the matrix on the left is the input. To get the 4 that is highlighted with green, we do a matrix multiplication followed by a sum so : 1x1 + 0x0 + 0x1 + 1x0 + 1x1 + 0x0 +1x1 + 1x0 + 1x1 = 4. 
+	\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-conv_layer}
+        \caption{Convolution layer calculations}\label{fig:conv_layer}
+    \end{figure}
+    
+	The area marked  in  red in the input is the receptive field. The kernel is moving over the image with a certain step size called the stride. A stride of 1 means that the kernel slides pixel by pixel. The stride length affect the size of the feature map,i.e. the larger stride length the fewer hidden neurons in the feature map. But no matter the stride size, the feature map will always be smaller than the input, so if the network is deep, the feature maps might shrink. To prevent that, we use padding, which is adding a layer of zero value pixels to surround the input with. This keeps the spatial size constant after the convolution, improves performance and makes sure the kernel and stride size fit with the input. 
+
+\subsection{Pooling layer}
+After a convolution layer, it is usual to add a pooling layer. The purpose of pooling is to continuously reduce the dimensionality, to reduce the number of parameters and computations in the network. This shortens training and controls over-fitting.
+The type of pooling that is found more often is max pooling which takes the maximum value in each square as shown on Figure ~\ref{fig:maxpool}. The square dimensions (2x2 on Figure ~\ref{fig:maxpool})  and the stride are determined beforehand. This layer decreases the feature map size while keeping a sufficient amount of information. 
+
+	\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-maxpool}
+        \caption{Max pooling layer}\label{fig:maxpool}
+    \end{figure}
+ 
+   
+Most of the pooled output values have very small transitional variance, which means that a translation in the input won't impact the output too much. This is very valuable since it is more important to detect the feature than to know precisely where it is situated in the image. The max-pooling will forget the exact position to focus on the relative position compared to the other features.
+
+\subsection{Classification Layer}
+\label{sec:class_lay}
+After the pooling layer, most CNN architecture will have one or more fully connected layers. Those are layers that are connected to all the input neurons. To perform the classification, we need this fully connected layer to have a number of output equals to the number of classes you want to perform classification on. It also needs to be combined with an activation function in order to output a probability distribution allowing the network to predict the class that has the highest probability. The choice of the activation function depends on the nature of the classification task.
+\subsubsection{Single label classification}
+When a network is trying to predict only one class, we usually use a softmax activation function. It is defines as follows: \[softmax_j(x) = \frac{e^x_j}{\sum\nolimits_{k} e^x_k} \]Softmax is useful because it converts the output of the last layer in the network into normalized class probabilities. So the probabilities sums up to one. It makes it easy to identify the most likely output since it will be the one with the highest probability. 
+\subsubsection{Multi-label classification}
+The specific property of softmax that makes the probability sum up to 1 makes it unusable for multi-label classifications. Which is when one picture can have several labels. So for that case, we use the sigmoid function as activation for the last layer.\[sigmoid_j(x) = \frac{1}{1 + e^-x} \] It will produce values between 0 and 1. The high values of output will be interpreted as high probability. We can chose a threshold for label selection, for example 0.5. We then say that if the value for the output of the sigmoid is greater than 0.5, we predict the label, otherwise we don't. This allows several labels to be predicted since more than one label can have a high value. 
+
+\section{Optimization}
+The aim of the training and optimization process is to tune the networks parameters in order to predict efficiently labels. To do that, we need to define an objective function which value measures the error between the prediction and the label. During the optimization, we use several methods to adjust the parameters to minimize the objective function.
+
+\subsection{Losses}
+We use two different objective functions in this thesis: the cross-entropy for single label classification and the binary cross entropy for multi-label classification. We will also refer to it as the loss. 
+For single label classification, the cross-entropy loss is defined as follows: \[H_y'(y) = - \sum\nolimits_k y'_k log(y_k)\] Where \(y_k\) is the predicted probability for class k and \(y'_k\) is the true probability for this class. It measures the performance of a classification which outputs probabilities between 0 and 1. On  Figure~\ref{fig:CE} (REF : \url{https://ml-cheatsheet.readthedocs.io/en/latest/loss_functions.htm}l), we can see that the closer we get to the true label, the smaller the loss. But when the probability decreases, the loss increases very quickly. So prediction that are very confident but wrong are more penalized.
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.7\textwidth]{./figures/02-cross_entropy}
+        \caption{Cross Entropy loss behaviour}\label{fig:CE}
+\end{figure}
+
+
+For multi-label classification, we use the binary cross entropy loss since we are not treating our labels as integers representing the class but their one hot encoded representation. Indeed, for single-label, if we have three classes, label for class 1 will be 1, label for class 2 will be 2 etc.. But for multi-label, we need to have the ability of having more than one label. A label for class 1 will then be [1, 0, 0], label for class 2 [0, 1, 0] and if an item is in class 1 and 2 its label will be [ 1, 1, 0]. So in the case the values of \(y'_k\) are strictly 0 or 1, we use binary cross entropy loss which is defined as follows: \[H_y'(y) = - \sum\nolimits_k y'_k log(y_k)\ + (1 - y'_k)log(1 - y_k) \]
+Those are basically two different formulation of the same loss. They have the same behavior and can both be referred to as log loss. 
+\subsection{Gradient Descent and Learning rate}
+. LEX FRIDMAN MIT ¨A gradient measures how much the output of a function changes if you change the input a little bit¨.
+
+
+In order to minimize the objective function, we use gradient based methods. The gradient descent is an iterative method which updates the parameters of the network with the aim of minimizing the objective function. By moving the parameters in a small step in the opposite direction of the gradient, we reduce the objective function. 
+
+Let J(\(\theta\)) be our objective function and \(\theta\) the parameters of the network. The gradient descent updates the parameters as follow: \[\theta' = \theta - \eta . \nabla_\theta J(\theta) \] The learning rate \(\eta\) determines the impact of these updates on the parameters. \(\nabla_\theta J(\theta) \) is the gradient of the objective function. At every iteration, the objective function is one step closer to the local minimum. The size of this step is influenced by the learning rate, but also by the objective function itself: a big loss will result in big updates. 
+
+
+The learning rate plays a crucial role: if it is too high, the learning might miss the local minimum and if it's too small, learning might be very slow. In both cases the biggest risk is that our function never converges to its local minimum, either because it keeps bumping on the gradients convex function or because it takes too long, see Figure~\ref{fig:LR}.  
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-LR}
+        \caption{Gradient behaviour for different learning rates, RF : https://towardsdatascience.com/gradient-descent-in-a-nutshell-eaf8c18212f0 }\label{fig:LR}
+\end{figure}
+
+The Figure~\ref{fig:LR_impact} shows the different behaviours of the training loss based on the value of the learning rate. The yellow curve shows a very high learning rate, the loss explodes quickly, the gradient has taken such a big step that it most likely exited the local minimum and it can't converge. The green curve shows a bit smaller learning rate: the gradient goes down the curve but then bounces back and forth on the gradient curve as on Figure~\ref{fig:LR}. It will converge to a non optimal value of the loss. Then the blue curve shows a way to small learning rate, the gradient updates the weight too slowly and they are not corrected enough to reach the optimal loss value in time. Finally the red curve shows a good learning rate. In the beginning of the training, we take big steps in the gradient so the loss decreases quickly but when we are close to the local minimum, the steps are smaller and the loss converges. 
+
+
+There are different strategies to chose the good learning rate. A good general idea is to start with a big learning rate to learn quickly in the beginning and make it smaller as we go along with the training. 
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.5\textwidth]{./figures/02-LR_impatc_train}
+        \caption{Training loss evolution based on different values of the learning rate, RF :https://towardsdatascience.com/understanding-learning-rates-and-how-it-improves-performance-in-deep-learning-d0d4059c1c10}\label{fig:LR_impact}
+\end{figure}
+
+\subsubsection{Gradient Descent variant}
+There are three variants of gradient descent which differ in the amount of data we use to compute the gradient of the cost function. 
+\begin{itemize}
+    \item The bacth gradient descent compute the gradient of the cost function for the entire training dataset. This is computationally efficient and gives a stable error gradient but it is intractable if the dataset does not fit in memory. 
+    \item The second variant is stochastic gradient descent which computes the gradient for every training example. It can be redundant since we recompute the gradient for very similar training examples.
+    \item The third variant is a compromise between the two others, it computes the gradient for every mini batch of n training example. This reduces the variance of the parameter update without wasting computation. It can also lead to a more stable convergence.
+\end{itemize} But there are still challenges, mainly regarding the learning rate. As we stated earlier, it is difficult to find a good value for it. A solution is to reduce the learning rate according to a specific time line - every ten epoch for example, or when the cost function is between a fixed threshold: this is called learning rate scheduler. Those works well but they have to be defined in advance so they don't adapt to the data. The final challenge is to keep the gradient from getting stuck in local minima or saddle points. Some algorithms or additional parameters have been implemented to overcome those challenges
+\subsubsection{Momentum}
+Around a local minimum, the surface curves are often steeper in one dimension than the others, this is called a ravine. In those areas, the gradient descent oscillates accross the slopes and converges slowly to the local minimum. The momentum helps to achieve convergence faster by speeding up the gradient descent in the good direction. For that, it remembers the value of the update vector at the past iteration and uses it to calculate the new update. \[ v_t = \gamma v_{t-1} + \eta . \nabla_\theta J(\theta)  \] \[\theta' = \theta - v_t\]
+Where \(v\) is the velocity and \(\gamma\) is the momentum term. The velocity represents the direction and the speed of the parameters and \(\gamma\) determines how much the velocity term impacts the update. The gradient now keeps in memory the direction the gradient was going before. So if the gradient keeps going in the same direction, it will gain velocity and make bigger updates. But if there is a brutal change of direction, the update will be moderated and there will be less oscillations. A common analogy for this is to imagine a ball going down a hill: while it rolls down, the momentum adds mass, making it go faster and overcoming smaller bumps. A risk of this technique is that if the gradient accumulates too much velocity in one direction, it might overlook a local minimum. 
+
+\subsubsection{Adam Optimizer}
+An other optimization algorithm is ADAM and stands for Adaptive Moment Estimation. It computes adaptive learning rates for each parameter. Adam stores estimates of the first and second moments - \(m_t\) and \(v_t\) - which are respectively the mean and the uncentered variance of the gradient. They are computed as follow: \[ v_t = \beta_2 v_{t-1} + (1 - \beta_2)g_t^2 \] \[m_t = \beta_1 m_{t-1} + (1 - \beta_1)g_t \]
+Where \(\beta_1\) and \(\beta_2\) are the learning rates and \(g_t\) is the gradient. So the parameter update is done taking into account both, how much the gradients are changing on average but also from one iteration to the other.  \(m_t\) and \(v_t\) are initialized as 0 vectors and experiments shows that they are biased towards 0, especially during the early steps are when the learning rates are small. This bias is handled by producing estimates of the first and second moment that are bias corrected. \(\hat{m}_t\) and \(\hat{v}_t\). 
+\[ \hat{v}_t=  \frac{v_{t}}{1 - \beta_2^t}\] 
+\[\hat{m}_t=  \frac{m_{t}}{1 - \beta_1^t}\] 
+We then use those estimates to calculate the parameters update as follow: \[\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t\]
+Where \(\eta\) is the general learning rate for the parameter update and \(\epsilon\) is a small constant to ensure mathematical stability. 
+The Adam algorithm is described on Algo (insert algo from paper : https://arxiv.org/pdf/1412.6980.pdf). It is an iterative algorithm, meaning that the parameters will be updated until they reach the stopping criterion. 
+Adam optimizer has shown that it achieves good results fast and is thus used as a default in many computer vision and deep learning algorithms. Several variants exists.
+\subsubsection{Adamax}
+One variant of the Adam algorithm is the Adamax optimizer. In the Adam algorithm. we use the \(L^2\) norm to update \(v_t\). This can be generalized to a \(L^p\) norm based update rule that would write as follows : \[ v_t = \beta_2^p v_{t-1} + (1 - \beta_2^p) \mid g_t\mid^p \] . This variant will become unstable as p gets bigger than 1 or 2. Surprisingly, as \(p\to\infty\), the behaviour is simple and stable. If we then defined \(u_t\) as \[u_t = \lim_{p\to\infinity}(v_t)^{1/p}\]
+\[u_t = \lim_{p\to\infinity}(\beta_2^p v_{t-1} + (1 - \beta_2^p)\mid g_t\mid^p)^{1/p}\] 
+\[u_t = \lim_{p\to\infinity}(1 - \beta_2^p)^{1/p}(\sum_{i=1}^{t}\beta_2^{t-i} \mid g_i\mid ^p)^{1/p}\]
+\[u_t = \lim_{p\to\infinity}((1 - \beta_2^p) \sum_{i=1}^{t}\beta_2^{t-i} \mid g_i\mid ^p)^{1/p}\]
+\[u_t = \lim_{p\to\infinity}(\sum_{i=1}^{t}\beta_2^{t-i} \mid g_i\mid ^p)^{1/p}\]
+\[u_t = \max (\beta_2^{t-1}  \mid g_1\mid, \beta_2^{t-2}  \mid g_2\mid ), ..., \beta_2^ \mid g_{t-1}\mid, \mid g_t\mid\]
+
+The last equation can be very easily written recursively: 
+\[ u_t = \max(\beta_2 . u_{t-1},  \mid g_t\mid)\]
+As shown on Algorithm (algo from papaer), \(u_t\) is initialized to 0 and then plugged in the Adam update: 
+\[\theta_{t+1} = \theta_t - \frac{\eta}{u_t} \hat{m}_t\]
+As \(u_t\) relies on the \(\max\) operation, it does not have a bias towards 0. This is why we do not need to calculate an estimate nor add a stabilization constant as for \(\hat{v}_t\) to calculate the update rule.
+
+\section{Accuracy and Validation metrics}
+In order to find out how a model is performing, we need to chose some metrics. The most popular one is accuracy since it speaks to anyone even not familiar with the field. But it can be limited in some cases and give a false impression that the model is doing well when it actually isn't. To get a better overview, we use precision and recall. 
+
+\subsection{F1 score}
+While accuracy is a good indication of how well the model is performing, they can give erroneous information. Let's say you are trying to identify people with a rare disease. You could very easily produce a model with 99.999999\% accuracy to identify a sick person simply by labeling every single individual as sick. So you produces a model with a nearly perfect accuracy, but with no value. In cases where there is quit a big imbalance between classes, the accuracy won't be a good measure of performance.
+What is important in our toy case is to identify as many of the relevant cases as possible, this is similar to maximizing the recall. 
+
+Recall calculation uses true positive (samples classified as positive that are actually positive) and true negatives (samples classified as negative that are actually positive). The recall is then defined as the number of true positives divided by the sum of the true positives and false negatives. 
+\[recall = \frac{True Positives}{True Positives + False Negatives} = \frac{sick_people_correctly_identified}{actually_sick_people}\]
+But a model with very high recall will have a bad precision. We would not want to tell healthy people that they are sick. 
+
+The precision focuses on the proportion of samples we said were correctly classified actually were. For that we introduce false positives (samples classified as positive that are actually negative). The precision is then defined as the number of true positives divided by the sum of true and false positives.
+\[precision = \frac{True Positives}{True Positives + False Positives} = \frac{sick people correctly identified}{people identified as sick}\]
+ In cases where we want to find an optimal trade-off between precision and recall, we use the F1-score which is defined as 
+ \[F1 = 2*\frac{precision * recall}{precision + recall} \]
+ The precision is a measure of a classfier's exactness while recall is a measure of a classifier's completeness. 
+ We use a harmonic mean to avoid giving good F1 scores to models with extreme values: 1 of recall and 0 of precision for example. 
+ In this thesis, all the labels we look into have more than two classes, and they are not all balanced. So we calculate the F1 score for our model by calculating it for each class and then ding a weighted sum to take into account class that are more populated than others. 
+There are several ways to visualize precision and recall, one of the prettiest way is to use confusion matrices. 
+\subsection{Confusion Matrix}
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.5\textwidth]{./figures/02-CM}
+        \caption{Confusion matrix}\label{fig:CM}
+\end{figure}
+
+A confusion matrix is a an overview of the precision and recall results of a classification problem. The columns represent the number of occurrences of the predicted labels for each class, while the rows represent the count of occurrences of the real labels for each class. It shows how the classification task is confused. This gives insight on the kind of error being made. It is relevant to know if your model is more likely to mix up  a german sheperd for a fox or a fox for a turtle! It makes the interpretation of the results better since you know how your model is biased. Also, some errors are more acceptable than others. One might be happier with a model with lower accuracy but miscalssifying similar objects, rather than one with very high accuracy but missing simple cases ?
+It makes it also easy to get the precision and the recall of the model. On Figure~\ref{fig:CM}, we see clearly how to identify true and false positives and negatives. This makes the calculation that we saw in last section easy to make. 
+
+Source of this image is \url{https://rasbt.github.io/mlxtend/user_guide/evaluate/confusion_matrix/} Matrix confusion
+
+
+
+\section{State of the art networks}
+Image classification is a challenging task that needs to more complex CNNs. I focus on three network architectures that have proven to give significant results in the classification task. Today, ResNet is the one that achieves the best results and AlexNet is the one that does it in the shortest time.    
+\subsection{GoogLeNet}
+\subsection{ResNet}
+ResNet won first place in the ILSRVC 2015 image classification competition. It introduces a new network architecture called Residual Learning. 
+
+When deep networks get even deeper, the accuracy gets saturated and then decreases rapidly: this is the degradation problem. That is the issue Residual Learning aims at solving. This phenomenon is surprising since one would think that the extra layers would learn as much, if not more, than a shallower network. But experiments prove that this is not the case: deeper networks gets a worse accuracy than shallower ones, see on the left of Figure~\ref{fig:resnetaccs}, the 34-layers plain network has a higher error than the 18-layers network. 
+
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-resnet_block}
+        \caption{Building block of ResNet}\label{fig:resnetblock}
+\end{figure}
+This is widely taken from the medium article. CAREFFUL\ref{blabla}
+A regular network architecture learns the mapping of input x to output y with a function H(x) which is a few stacked non linear layers. ResNet architecture defines a residual function using F(x) = H(x) – x which can be expressed as F(x) = H(x) + x, where F(x) is a few stacked non linear layers and x is the identity function, see Figure~\ref{fig:resnetblock}. The intuition behind this architecture is that if the identity mapping is optimal (we want the input to be equal to the output) the it’s easier to drive H(x) to 0 and only keep the identity than to fit H(x) to the identity. In practice, identity mappings are rarely optimal. But the hypothesis that it’s easier to optimize a residual mapping function than the original  mapping holds during experiments. Figure~\ref{fig:resnetaccs} shows that ResNet overcomes the degradation problem and achieves better results than its plains counterparts.
+
+
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-Resnet_comparing_acc}
+        \caption{Training on ImageNet. Thin curves denote training error, and bold curves denote validation error of the center crops. Left: plain
+networks of 18 and 34 layers. Right: ResNet of 18 and 34 layers. copy pasted from paper}\label{fig:resnetaccs}
+\end{figure}
+
+\subsection{AlexNet}
+AlexNet architecture focuses on parallelizing CNNs across multiple GPUs. It won first place in the ILSRVC in 2012. It had a great impact on deep learning and computer vision since it allowed networks to scale better than all alternatives.
+The idea is to parallelize in different ways depending on the kind of layer the network is training. There are two ways of parallelize the training of a network : 
+\begin{itemize}
+    \item Model parallelism: different workers train different parts of the model. Whenever a model part trained by a worker needs output from another model part trained by an other worker, they must synchronize.  
+    \item Data parallelism: different workers train on different data samples. The workers must synchronize the model parameters to make sure they are learning a consistent model. 
+\end{itemize}
+As we saw in section 2.3, CNNs consist of two types of layers: convolutional layers that contain most of the computations (between 90 and 95\%) and fully connected layers that contains most of the model parameters (around 95\%). In AlexNet, the convolutional layers rely on data parallelism while fully connected layers rely on model parallelism. 
+
+This is illustrated on Figure~\ref{fig:alexnet}. 
+\begin{figure}[!htp]
+    \centering
+        \includegraphics[width=0.9\textwidth]{./figures/02-alexnet}
+        \caption{Training of a network with 3 convolutional layers and 2 fully-connected layers by K workers. }\label{fig:alexnet}
+\end{figure}
+What happens is that each of the K workers is given different data batch and computes all the convolutions on its data: this is data parallelism. Then it switches to model parallelism. One worker sends its last staged convolution to all other workers who then compute the fully-connected layers and start back propagation. In parallel of that, the next workers sends its last-stage convolution to all other workers. They can then compute the fully-connected layers on the second batch and so on. The same behaviour is implemented in the back propagation. 
+
+The best error achieved by AlexNet was 42,27\% on top-1 error. 
+
+\subsection{Transfer Learning}
+There are few database big enough to properly train those networks. And when there is, it can takes weeks before the network achieves acceptable results. A more clever way to use those networks is through transfer learning. This technique relies on the fact that what a network learns from a dataset is still useful for another data set. To transfer this kmowledge,  we download the weights used to achieve the best performance of a network on an sufficiently big data set, and we build our training algorithm on top of that network. A very important propoerty underlying this is that the deeper one goes into the layers of a network, the more complex shapes the network learns \url{https://arxiv.org/abs/1411.1792}. So the early layers learn the basic shapes, colors... while deeper layers learn complex shape, and more subtle variation in the image. 
+There are two major ways of using transfer learning. 
+\begin{itemize}
+    \item Finetuning: The network is initialized - all the parameters of every layer - with the pretrained network. The network is in most case pre trained on the ImageNet dataset on 1000 classes. It is just another way to initialize weights, nothing is changed further in the training algorithm.
+    \item Network as feature extractor: An other way to use it is to set all the weights to the pretrained ones, and freeze them, except the ones in the final fully connected layer. This last layer is initialized to random weights and only those weights are modified during the training. 
+    This technique is quicker since gradients are only computed for the last layer. \url{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5288526}
+\end{itemize}
+Those two techniques can be adapted.  (link to c231n course) An alternative would then be to freeze the k first layers and just learn again the n-k remaining ones to adapt it best to our classification task. For example, if the classification problem contains images that are very different to the ones contained in the ImageNet, we might want to retrain most of the model. 
+Using transfer learning helps achieving faster and better results. Since it starts from a very advanced level instead of starting from 0, the networks converges and learns much more quickly on the new data.

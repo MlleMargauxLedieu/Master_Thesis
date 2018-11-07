@@ -1,0 +1,38 @@
+\chapter{Introduction}
+\label{chp:introduction} 
+\section{Motivation}
+In spite of the shift to renewable energies, the search for oil and gas remains strong as ever.  Oil money dirves reseaech for more oil lots lots of money
+
+. 
+\section{Objective}
+The aim of this thesis is to produce an image recognition algorithm that is able to differentiate between different levels of porosity, different dunham classification, different components and different depositional rock types using picture of thin sections of core rocks. The purpose is to help geologists in labeling carbonate rocks since it can be a time consuming and laborious task. 
+
+This algorithm is built with the help of convolutional neural networks. We feed the networks with labeled images of thin sections and it learns to identify the different elements stated earlier. We consider that we reached the aim when we produce an algorithm capable of efficiently predict the amount of porosity, dunham classification, depositional rock type and correct components in a new images we feed it. 
+
+\section{Research Questions}
+To reach this goal, we define several more specific research questions: 
+\begin{itemize}
+    \item Are convolutional neural networks able to differentiate between the selected parameters ?
+    \item Which network performs best ?
+    \item How does initialization and research parameters influence the performance of the network ?
+\end{itemize}
+\section{Research Methods}\label{sec:research-method}
+To reach the goal and address the research questions, we divide our research into two parts. First, we conduct a literary review to understand the labels we are trying to identify and the theory behind convolutional neural networks and their different optimization. The second part will follow a design science research methodology where we will test different networks and optimization techniques. Methodology will be discussed further in Chapter \ref{chp:methodology}.
+\section{Thesis Outline}
+
+In the first Chapter \ref{chp:introduction}, we introduced the motivations for this thesis. It contains arguments for how an image classification algorithm could facilitate the job of geologist and allow them to focus on tasks that needs more expertise. Further the aim of the thesis and the related research questions were presented. 
+
+
+The second Chapter \ref{chp:background}, contains the theory needed to understand the data given and how the labels are associated to the quality of the reservoir rocks, and the theory needed to build an image recognition algorithm based on CNN. More specifically, it introduces the different layers and operations that they consist of, as well as optimization processes. Finally, the architecture and theory behind the state of the art network are explained.
+ 
+
+In Chapter \ref{chp:methodology}, we introduce the methods used in the image classification algorithm. In the first part, we discuss the label selection and the preprocessing, then we describes the data augmentation techniques. In a third section, we look into details into the architecture of each network and finally we present the different experiments that were conducted.  
+
+
+Chapter  \ref{chp:results} simply present the results of each experiment for each labels using tables, plots and confusion matrices.
+
+
+In Chapter \ref{chp:discussion}, we discuss the results and the eventual limitations that we have identified.
+
+
+In Chapter \ref{chp:conclusion}, we draw conclusions from the results and discuss thoughts about future work and improvements that could be conducted. 

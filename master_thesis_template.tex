@@ -1,0 +1,82 @@
+\documentclass[a4paper]{report}
+
+\usepackage{KTHEEtitlepage}
+
+% Packages used in the main document for this particular example:
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[bookmarks,pdftitle={thesis title}]{hyperref}
+\usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Information to appear on the title page:
+\ititle{Predicting reservoir rock quality from thin sections of core using Convolutional Neural Networ}
+\iauthor{Margaux Ledieu}
+\idate{2018}
+\irefnr{XR-EE-KT 20xx:xxx} % will be given after the defense
+\iaddress{Machine Learning\\
+  School of Computer Science and Electrical Engineering\\
+  KTH Royal Institute of Technology}
+
+\makeititle \pagenumbering{roman}
+\clearpage
+\thispagestyle{empty}
+\phantom{a}
+\addtocounter{page}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Abstract}
+
+\thispagestyle{empty}
+
+Abstract of the thesis goes here...
+
+\addtocounter{page}{-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Sammanfattning}
+
+\thispagestyle{empty}
+
+Abstract (in Swedish) of the thesis goes here...
+
+\addtocounter{page}{-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Acknowledgment}
+\thispagestyle{empty}
+
+I thank myself for writing this nice thesis ...
+
+\addtocounter{page}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+
+%%%% List of figures %%%%%
+\listoffigures
+\cleardoublepage
+
+%%%% List of Acronyms
+
+\pagenumbering{arabic}
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 1:
+\include{chapters/01-introduction}
+\include{chapters/02-background}
+\include{chapters/03-methodology}
+\include{chapters/04-experiments}
+\include{chapters/05-results}
+\include{chapters/06-discussion}
+\include{chapters/07-conclusion}
+
+\renewcommand*{\bibname}{References}
+\bibliographystyle{alpha}
+\bibliography{main}
+\pagenumbering{arabic}
+
+\end{document}
