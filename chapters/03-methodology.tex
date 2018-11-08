@@ -8,22 +8,21 @@ As explained in section ref to coring, the data has been gathered through coring
  
  For the classes that are sufficiently populated, we plot the distribution of the data points within those classes, on Figure~\ref{fig:litandstruc}, we can see the labels distribution for Lithology and Structures. The labels are extremely unbalanced, so trying to predict any other label than Lit1 for Lithology and Structure 1 or 2 for Structures would be very difficult. This is why we will not try to predict on those class. 
  The remaining classes : Porosity, Components, Dunham and DRT, have a good distribution of points within the class. They also give a good overview of the rock properties. If we are able to predict correctly on them, we will have an idea of how good the reservoir rock is. 
-
 \begin{figure}
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-classes.png} % first figure itself
-        \caption{Classes distribution over the samples}\label{fig:classes}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-boob.PNG} % second figure itself
-        \caption{Distribution of the classes Lithology and Structure over the samples}\label{fig:litandstruc}
-    \end{minipage}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-classes.png}
+  \caption{Classes Distribution over all the samples in the data set}
+  \label{fig:classes}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-boob.PNG}
+  \caption{Distribution of the classes Lithology and Structure over the samples}
+  \label{fig:litandstruct}
+\end{subfigure}
 \end{figure}
-
-\subsection{Label preprocessing}
+\subsection{Label pre-processing}
 Once we selected the 4 labels to predict on, we looked into the details of the distribution and adapted it to make it easier to predict on. For the Dunham labels, the first class was under represented, only 7 samples. So we decided to simply cut it out. We now have 6 classes that are almost homogeneously distributed, see Figure~\ref{fig:dunham}. 
 For the porosity labels, further discussion with geologists explained that there are two different levels of description of the porosity, the first level is the amount of porosity: no, minor, intermediate or abundant and the second is the kind of porosity: patchy or micro-porosity. In a first pass, we will only focus on the quantitative aspect: how much porosity do we observe in each sample, see Figure~\ref{fig:poro}. A further analysis would be to determine what kind of porosity accounts for this total porosity. It might be considered at a later stage. Also, for this first experiment, after we have extracted four labels, we sorted them from no to abundant visual porosity. 
 As shown on Figure~\ref{fig:drt} and Figure~\ref{fig:compo}, the DRT and components class have a lot of different labels: 19 and 13 respectively. Some of them are not populated enough to be considered. Some of the labels we chose to keep are still under represented but we believe they are populated enough to be predicted.
@@ -34,28 +33,34 @@ We can divide the classes into two main categories. The DRT and Dunham labels ar
 As we can see on Figures~\ref{fig:dunham} to ~\ref{fig:compo}, our classes are not equally distributed, our network will thus be biased towards the most populated labels. A way to counter this would be to get more samples of the under represented class, but when one is trying to characterize a certain geographical area, it is normal to find rocks and components that are more present than others. How we deal with this issue in this project is by calculating the loss with weights. We want to teach our model that when it sees a sample from the abundant\_porosity class, it should take it into account with a higher weight than one from no\_vp. This way, it should not be biased towards the most populated class. 
 For single label classification, the weights of each class is calculated as follows : weight of class A is the total number of samples divided by the number of samples in class A.
 For multi label classification, the labels are represented as one-hot encoded vectors as we saw in section about lossses, so the weigths are calculated as follows: weight of class A is the number of 0 in class A divided by the number of 1 in class A.
+
 \begin{figure}
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-Dunham.PNG} % first figure itself
-        \caption{Dunham labels distribution before and after preprocessing}\label{fig:cdunham}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-porosity_baby.PNG} % second figure itself
-        \caption{Porosity labels distribution before and after preprocessing}\label{fig:poro}
-    \end{minipage}
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-DRT.PNG} % second figure itself
-        \caption{DRT labels distribution before and after preprocessing}\label{fig:drt}
-    \end{minipage}
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-Components.PNG} % second figure itself
-        \caption{Components label distribution before and after preprocessing}\label{fig:compo}
-    \end{minipage}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-Dunham.PNG}
+  \caption{Dunham Labels}
+  \label{fig:dunhamlab}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-porosity_baby.PNG}
+  \caption{Porosity Labels}
+  \label{fig:porolab}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-DRT.PNG}
+  \caption{DRT Labels}
+  \label{fig:drtlab}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-Components.PNG}
+  \caption{Components Labels}
+  \label{fig:compolab}
+\end{subfigure}
+\caption{Label distributions before and after pre-processing. Some labels are cut out,  the order can be re-arranged in order to produce more powerful visualization}
+\label{fig:labelsdistrib}
 \end{figure}
 
 \subsection{Data Augmentation}
@@ -64,103 +69,119 @@ The networks used for this thesis are trained on dataset of around 10,000,000 im
 
 Cropping is a great way to create multiple images from one image, but there is a risk to crop an irrelevant zone of the image. When classifying Components for example, on Figure~\ref{fig:crops}, we can see what could go wrong when cropping. Indeed, both images generated from the green and the yellow crops will have the same labels. The organism in the yellow crop is one of the components of the thin section, it will thus be one of the labels of the image. This means that both images will have this component as label, but it is not present in the second image. So we will teach our model the wrong information. A way of dealing with this would be to make big crops, so we keep most of the valuable information in each cropped image.  
 
-When coring, a blue resine is injected into the core in order to keep fragments together. It also allows to see pores more clearly. It is thus important to maintain this blue color when doing data augmentation. That is why we can not change the colors in our images, techniques such as grayscale are discarded.
-
 \begin{figure}[h]
     \centering
-        \includegraphics[width=0.5\textwidth]{./figures/03-cropping_example_with2crops}
+        \includegraphics[width=0.3\textwidth]{./figures/03-cropping_example_with2crops}
         \caption{Thin section with 2 random crops}\label{fig:crops}
 \end{figure}
 
-Rescaling can not be used either since can modify the size of the pores on an image and make them look bigger than they are. It would influence the amount of porosity identified.
+When coring, a blue resin is injected into the core in order to keep fragments together. It also allows to see pores more clearly. It is thus important to maintain this blue color when doing data augmentation. That is why we can not change the colors in our images, techniques such as grayscale are discarded.
 
 
 The augmentations used in this thesis are :
 \begin{itemize}
-    \item Color Jitter: It is a gentle way to change the brightness, contrast, hue and saturation of the image. Below on Figures~\ref{fig:brightness} to ~\ref{fig:hue}, one can see how each parameters influence the of each parameter on the images. You can give values to each parameter and it will determine what is the maximal influence the jittering can have. For example, a random bumber between brightness and - brightness is calculated, then added to 1, and this is the scale at which the brightness will be modified. I pick images where the impact have been to enhance the parameters except for saturation, where the effect was actually to decrease the saturation parameter. This is to give a more exhaustive view of how parameters can be influenced to create new images. 
-    Has mentioned before, it is important to keep the colors in the sections, this is why we will keep the hue parameter to 0.
-    \begin{figure}
-    \centering
-    \begin{minipage}{0.4\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-bightness08.PNG} % first figure itself
-        \caption{Image after ColorJitter with brightness to 0.8, all others parameters to 0}\label{fig:classes}
-    \end{minipage}
-    \begin{minipage}{0.4\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-contrast1.PNG} % second figure itself
-        \caption{Image after ColorJitter with contrast to 1, all others parameters to 0}\label{fig:litandstruc}
-    \end{minipage}
-    \begin{minipage}{0.4\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-saturation0.PNG} % second figure itself
-        \caption{Image after ColorJitter with saturation to 0.6, all others parameters to 0}\label{fig:litandstruc}
-    \end{minipage}
-    \begin{minipage}{0.4\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-hue05.PNG} % second figure itself
-        \caption{Image after ColorJitter with hue to 0.5, all others parameters to 0}\label{fig:litandstruc}
-    \end{minipage}
-\end{figure}
-    \item Rotation: This was the first data augmentation technique I used. The images in my data set are thin sections pictures of core. The core that is drilled out is a cylinder, so the pictures are round. In order to focus on the relevant pixels, all the pixels outside of the circle have been put to 0. This also allowed to be able to rotate the image as much as we want. The way we actually proceed is that we draw a number between 0 and 360 and this number is the angle at which we rotate the picture. So it combines every kind of rotation, flips.. that could be done. On Figure~\ref{fig:rotation}, we see how the rotation combined with a circle crop look. 
+    \item Color Jitter: It is a gentle way to change the brightness, contrast, hue and saturation of the image. Below on Figures~\ref{fig:brightness} to ~\ref{fig:hue}, one can see how each parameters influence the image. You can give values to each parameter and it will determine what is the maximal influence the jittering can have. 
+   
+    For each parameter p, ColorJitter choses a random value between 1 - p and 1 + p and then applies this parameter adjustment with this value. So for example, if we chose to set brightness to 0.3, then it will choses a random value between 0.7 and 1.1, let's say 1.05 and adjust the brightness with a intensity of 1.05. This is why it is important to keep the values small. Indeed, if we chose 0.8 for brightness for example, we risk to have it adjusted with an intensity of 0.2 which would result in an almost completely black image. Some tests to find the good values for those parameters has shown that too high values give poor results on the test set. 
+    
+    So we chose to keep all the parameters to 0.2. Except for hue that was kept to 0 since, as mentioned before, it is important to keep the colors unchanged.
+
 \begin{figure}
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{./figures/03-rotation_260} % first figure itself
-        \caption{Original image cropped in a circle and rotate of 260 degrees}\label{fig:elastics1}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-resize.PNG} % second figure itself
-        \caption{Original image resized to 224x224 pixels}\label{fig:resize}
-    \end{minipage}
-\end{figure}
-    \item Resizing: The pictures were initially 5000x5000 pixels. I resized them to sizes usable by different models (224x224 for resnet etc). This implies loss in image quality but it drastically increases the speed of computation. See Figure~\ref{fig:resize}
-    \item Elastic Transform : taken from \url{http://cognitivemedium.com/assets/rmnist/Simard.pdf} Elastic transformation rely on the fact that the images have some invariance to elastic deformation, so instead of moving the whole image as in affine transformation, we move each pixel to a new position dependant of the previous one. This can be seen as a grid underlying the image in which each point of the grid will be slightly moved, resulting in a distorted image. We use this technique with small coefficients. On Figure~\ref{fig:elastics1} and~\ref{fig:elastics2} , we have examples of two different sets of coefficients. The elastic transform on the first images looks more like adding some noise to the picture while the one on the right is extremely distorted. In our case, we can not use the second set of coefficients since we don't want to deform components so much that they are not identifiable anymore. 
-    \begin{figure}
-    \centering
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-elastic_trans_08_03.PNG} % first figure itself
-        \caption{Elastic Transform with (\(\alpha\)=3, \(\sigma\)=0.3)}\label{fig:elastics1}
-    \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
-        \centering
-        \includegraphics[width=0.9\textwidth]{figures/03-elastic_trans_3000_30.PNG} % second figure itself
-        \caption{Elastic Transform with (\(\alpha\)=3000, \(\sigma\)=30)}\label{fig:elastics2}
-    \end{minipage}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-bightness08.PNG}
+  \caption{Brightness= 0.2}
+  \label{fig:brightness}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-contrast1.PNG}
+  \caption{Contrast = 0.2}
+  \label{fig:contrast}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-saturation0.PNG}
+  \caption{Saturation = 0.2}
+  \label{fig:saturation}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-hue05.PNG}
+  \caption{Hue = 0.5}
+  \label{fig:hue}
+\end{subfigure}
+\caption{Images before and after being augmented with color jitter. The parameter indicated under the image is the only one that is not set to 0. It shows the impact of different the parameters of ColorJitter.}
+\label{fig:colorjitter}
 \end{figure}
 
-    \item Median Scale : This scales with the median and the mean of each channel (red, green and blue) of the numpy array. This gives a more clear view of the picture as shown on Figure~\ref{fig:median}  
- \begin{figure}[h]
-    \centering
-        \includegraphics[width=0.5\textwidth]{./figures/03-medianscale}
-        \caption{Median scale transform}\label{fig:median}
+    \item Rotation: This was the first data augmentation technique I used. The images in my data set are thin sections pictures of core. The core that is drilled out is a cylinder, so the pictures are round. In order to focus on the relevant pixels, all the pixels outside of the circle have been put to 0. This also allowed to be able to rotate the image as much as we want. The way we actually proceed is that we draw a number between 0 and 360 and this number is the angle at which we rotate the picture. So it combines every kind of rotation, flips.. that could be done. On Figure~\ref{fig:rotation}, we see how the rotation combined with a circle crop look.
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/03-rotation_260}
+  \caption{Circle crop and 260 degrees rotation}
+  \label{fig:rotate}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-resize.PNG}
+  \caption{Resizing to 224x224 pixels}
+  \label{fig:resize}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-elastic_trans_08_03.PNG}
+  \caption{Elastic Transform with (\(\alpha\)=3, \(\sigma\)=0.3)}
+  \label{fig:elastics1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/03-elastic_trans_3000_30.PNG}
+  \caption{Elastic Transform with (\(\alpha\)=3000, \(\sigma\)=30)}
+  \label{fig:elastics2}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/03-medianscale}
+  \caption{Median Scale}
+  \label{fig:median}
+\end{subfigure}
+\caption{Images before and after being augmented with various Data Augmentations. We perform all of them on the original sized image to make it more visible. But in practice we perform the resizing first, to optimize our computation time.}
+\label{fig:transfos}
 \end{figure}
+
+    \item Resizing: The pictures were initially 5000x5000 pixels. I resized them to sizes usable by different models (224x224 for resnet etc). This implies loss in image quality but it drastically increases the speed of computation. See Figure~\ref{fig:resize}
+    \item Elastic Transform : taken from \url{http://cognitivemedium.com/assets/rmnist/Simard.pdf} Elastic transformation rely on the fact that the images have some invariance to elastic deformation, so instead of moving the whole image as in affine transformation, we move each pixel to a new position dependant of the previous one. This can be seen as a grid underlying the image in which each point of the grid will be slightly moved, resulting in a distorted image. We use this technique with small coefficients. On Figure~\ref{fig:elastics1} and~\ref{fig:elastics2} , we have examples of two different sets of coefficients. The elastic transform on the first images looks more like adding some noise to the picture while the one on the right is extremely distorted. In our case, we can not use the second set of coefficients since we don't want to deform components so much that they are not identifiable anymore. 
+
+    \item Median Scale : This scales with the median and the mean of each channel (red, green and blue) of the numpy array. This gives a more clear view of the picture as shown on Figure~\ref{fig:median}  
  \end{itemize}
 
 I have chosen those augmentations based on what is usually used in Conmputer Vision tasks (links to articles).
 
-Our hypothesis is that more data will produce better results. But there is a risk our model will be influenced too much by the augmentation techniques and won't be able to recognize normal images.  The augmentation that might be a problem is color jitter. Indeed, if we have a too high value for brightness for example, we might introduce images that are either all white or all black and are thus irrelevant for our learning. 
-In order to validate our hypothesis and find the best values for the parameters, we run different experiments in parallel, two with all data augmentation mentioned before with different parameters value and one where we only perform rotation. Figure~\ref{fig:dataaug}, shows the results of this experiment. It confirms that data augmentation is helping our model learn better.
 
 \section{Experiments}
 \subsection{GoogLeNet}
 \subsection{ResNet}
 ResNet is the network that gives theoretically the best results. There are different versions of this network with different depths: Resnet18, Resnet50, Resnet101 and more. But we must keep in mind that we have a small dataset compared to what is usually used for those networks. Resnet has been trained on the ImageNet dataset which contains over 10,000,000 images (research paperresnet or imagenet webpage). After data augmentation, we have around 19000 images. It is still far from ImageNet, so we should be careful about overfitting. We can't use a too deep network on a small amount of data. That is why we chose to only use Resnet18. The architecture is presented on Figure~\ref{fig:resnet}
- \begin{figure}[h]
-    \centering
-        \includegraphics[width=0.5\textwidth]{./figures/03-Resnet_architecture}
-        \caption{Median scale transform}\label{fig:resnet}
-\end{figure}
+
 After a first convolution layer, we use a basic block as shown on figure~\ref{fig:alex} that we repeat until the last layer, where out\_features is the number of classes the network should output. 
 \subsection{AxelNet}
-AxelNet is a smaller network, only 8 layers deep, so the lack of training data is not so critical in this case. The architecture is as follows: 
- \begin{figure}[h]
-    \centering
-        \includegraphics[width=0.5\textwidth]{./figures/03-alexnet_architecture}
-        \caption{Median scale transform}\label{fig:alex}
+AxelNet is a smaller network, only 8 layers deep, so the lack of training data is not so critical in this case. IT is divided in two parts: 5 convolutional layer to do the feature extraction and 3 linear layers to do the classification.  The details of the architecture are shown on Figure~\ref{fig:resarchi}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/03-Resnet_architecture}
+  \caption{ResNet18}
+  \label{fig:resarchi}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/03-alexnet_architecture}
+  \caption{AlexNet}
+  \label{fig:alexarchi}
+\end{subfigure}
+\caption{The architectures of the two networks. AlexNet is a simple 8 layers network divided in 2 oarts: feature extraction and classification. Resnet 18 is a deep network with a basic block repeated several times and a single linear layer in the end}
 \end{figure}
 
 \subsection{Hyper parameters}

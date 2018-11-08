@@ -206,7 +206,27 @@ Source of this image is \url{https://rasbt.github.io/mlxtend/user_guide/evaluate
 
 \section{State of the art networks}
 Image classification is a challenging task that needs to more complex CNNs. I focus on three network architectures that have proven to give significant results in the classification task. Today, ResNet is the one that achieves the best results and AlexNet is the one that does it in the shortest time.    
-\subsection{GoogLeNet}
+\subsection{GoogLeNet and Inception-v3}
+GoogLeNet was the winner of the ILSRVC in 2014, it also known as Inception V1. It is a CNN inspired by LeNet that introduces a new type of module called inception. Those modules can bee seen as smaller models within the network. 
+
+In classic architecture, you have to decide at each layer which size the filters for the convolution should be: 5x5, 3x3... But from one image to another, the location of the information and its size can vary a lot, that is why it is difficult to know beforehand which of those convolutions would give the best result. The inception module tackles this problem by performing all the convolutions in parallel and concatenating the feature maps before passing it on to the following layer. This way, the model can pick up both local features from the small convolutions and more general features with bigger convolutions. Figure~\ref{fig:inception} shows the detailed implementation of the inception module. As we explained before, 1x1, 3x3 and 5x5 convolutions are done in parallel. The max-pooling layer is added because it has been successfully used in current state of the art network. Also a 1x1 convolution as well as a ReLu activation are added to reduce the dimensionality of the feature map before passing it to the bigger convolutions. The GoogLeNet is 22 layers deep and stacks convolution layers and inception module as presented in Figure~\ref{fig:googl}
+
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/02-inception_module}
+  \caption{The inception module with dimensionality reduction}
+  \label{fig:rotate}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{./figures/02-googlearch}
+  \caption{Full architecture of GoogLeNet}
+  \label{fig:googl}
+\end{subfigure}
+\end{figure}
+Some optimization were presented in (going deeper paper). The first one is Inception-v2 which tackles the issue of representational bottleneck. This happens when one use reduces the dimension of the input too much resulting in a loss of information. It solves this issue by replacing the 5x5 convolution by two 3x3 convolutions, which also boosts the performance. On top of that Inception-v3 implements a RSMSProp optimizer, factorization of the 7x7 convolutions in a similar way as Inception-v2 and label smoothing. 
+
 \subsection{ResNet}
 ResNet won first place in the ILSRVC 2015 image classification competition. It introduces a new network architecture called Residual Learning. 
 
