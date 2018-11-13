@@ -3,5 +3,7 @@
 \subsection{Initialization}
 \subsection{Optimizers}
 \section{Classification Task}
+We can see that Resnet is very good at predicted the class that is mostly populated when testing. Results are that Resnet is good but it is unfortunaltely very much overfiting. Even with a big dropout, we still have a lot of trouble adapting to doffferent class repartition. 
 \section{Performance}
-What does our accuracy tells us ? Is it better than geologists
+WNow that we presented and discussed the theoritical intrication of our results, we can take a step back and think about what those accuracy actually means. it is known that there is a lot of disagreement between geologist. So for a same picture for example, they would not all agree on the label. 
+Even to assess the porosity, two geolosgists might disagree on if it there is no porosity at all, r a small amouint. This explains why our model struggles to identify this case. But it gets even more difficult when we have to identify the depositional rock types. Since we have to identify both the matrix of the rock but also which components are there and in which quantity. Also some of the labeles in DRT are very similar to one another. This is why we get such poor results on this class. If geologists can't even agree in real life, then we can not expect our model to get a high accuracy. 

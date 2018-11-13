@@ -2,11 +2,11 @@
 In this chapter we explain the research methods used and rationalize their choice. Further, we present the pre processing and label selection, the detailed architecture of the networks and the different experiments that have been conducted. 
 \section{Data}
 
-As explained in section ref to coring, the data has been gathered through coring and labelled by geologist. Further on, we will consider the geologists labels as the ground truth. Further reflection on that will be discussed in the Discussion section. So we have gathered 1907 labeled images. 
+As explained in section\ref{sec:coring}, the data has been gathered through coring and labelled by geologist. Further on, we will consider the geologists labels as the ground truth. Further reflection on that will be discussed in the Discussion section. We have gathered 1907 labeled images. 
 \subsection{Label Selection}
- The labels of every images can be divided into different categories that we will refer to as classes, see Figure~\ref{fig:classes}. For example, the class Lithology contains 10 different labels, each representing one of the possible lithologies. One image can have labels for one or more classes, but some classes are under-represented. The classes Dominant Grain type, Diagenesis, Cutting description and Sorting have less than 1000 data points, this is not enough to produce good prediction on, that is why we chose not to use them.
+ The labels of every images can be divided into different classes, see Figure~\ref{fig:classes}. For example, the class Lithology contains 10 different labels, each representing one of the possible lithologies. Not all images have labels in every classes, that is why some classes are under-represented. The classes Dominant Grain type, Diagenesis, Cutting description and Sorting have less than 1000 data points, this is not enough to produce good prediction on, that is why we chose not to use them.
  
- For the classes that are sufficiently populated, we plot the distribution of the data points within those classes, on Figure~\ref{fig:litandstruc}, we can see the labels distribution for Lithology and Structures. The labels are extremely unbalanced, so trying to predict any other label than Lit1 for Lithology and Structure 1 or 2 for Structures would be very difficult. This is why we will not try to predict on those class. 
+ For the classes that are sufficiently populated, we plot the distribution of the data points within those classes, on Figure~\ref{fig:litandstruct}, we can see the labels distribution for Lithology and Structures. The labels are extremely unbalanced, so trying to predict any other label than Lit1 for Lithology and Structure 1 or 2 for Structures would be very difficult. This is why we will not try to predict on those class. 
  The remaining classes : Porosity, Components, Dunham and DRT, have a good distribution of points within the class. They also give a good overview of the rock properties. If we are able to predict correctly on them, we will have an idea of how good the reservoir rock is. 
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
@@ -185,7 +185,7 @@ AxelNet is a smaller network, only 8 layers deep, so the lack of training data i
 \end{figure}
 
 \subsection{Hyper parameters}
-Hyper parameters are the parameters that are chosen before training, and that will remain the same during the whole training. One of the questions in this thesis is to study the influence of some hyper parameters on the speed and convergence of the algorithm, so some of them may vary from one experiment to an other. 
+Hyper parameters are the parameters that are chosen before training, and that will remain the same during the whole training. One of the questions in this thesis is to study the influence of some hyper parameters on the  convergence of the algorithm, so some of them may vary from one experiment to an other. 
 
 \subsubsection{Weights initialization}
 As mention in section (translearn), there are two ways of using the networks to perform a classification task. Either you train all the layers in the network and randomly initialize the weights. Or we use the weights that have achieved good results on known dataset and retrain only a smaller part of the network to make it specific to the task.
@@ -198,7 +198,8 @@ The batch sized is fixed to 700 so that two experiments can be run in parallel o
 
 \subsubsection{Optimizers}
 For Adamax, there is a set of default values for the hyper-parameters: \(\eta = 0.002\), \(\beta_1 = 0.9\) \(\beta_2 = 0.999\), \(\epsilon = 1e-8\) that we will keep across all experiments.
-For the SGD, we chose an initial value of learning rate of 0.001 and implemented a learning rate decay very 20 iterations, and a momentum of 0.9. '
+For the SGD, we chose an initial value of learning rate of 0.001 and implemented a learning rate decay very 20 iterations, and a momentum of 0.9. 
+Adamax is used to get a good convergence quickly (papers 2 at least), this is why we use Adamax in the first experiment on the weight initialization. This first experiment is going to give us insight on which network performs best on the different labels. Then in a second experiment, we will try to optimize further the best performing model to reach the best possible results using the SGD+momentum optimizer.  
 
 \subsubsection{Regularization}
-As we mentioned before, the small amount of data we have make over fitting likely. In order to avoid this problem, we add a layer of overfitting in Resnet with probability 0.4, with probability 0.5 in AlexNet and in GoogLeNet. ResNet already performs b<tch normalizarion between every convolutional layer, that is why we chose a slightly smaller value of dropout. 
+As we mentioned before, the small amount of data we have make over fitting likely. In order to avoid this problem, we add a layer of overfitting in Resnet with probability 0.4, with probability 0.5 in AlexNet and in GoogLeNet. ResNet already performs batch normalization between every convolutional layer, that is why we chose a slightly smaller value of dropout. 
