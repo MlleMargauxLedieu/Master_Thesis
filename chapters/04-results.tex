@@ -264,38 +264,37 @@ On Figure\ref{fig:plotsgoog}, we plotted the accuracy, F1 score, and average tra
     & Porosity & 76\% &  30 \\
     &DRT & 100\% &  30 \\
     &Components & 100\% &  50 \\ \hline
-     \multirow{4}{*}{Random} & Dunham &  90\% & 30 \\
-    & Porosity & 94\% &  30 \\
-    &DRT & 100\% &  30 \\
+     \multirow{4}{*}{Random} & Dunham &  90,4\% & 30 \\
+    & Porosity & 97,5\% &  30 \\
+    &DRT & 98,9\% &  30 \\
     &Components & 100\% & 30 \\ \hline
 \end{tabular} 
 \end{table}
 
-\iffalse
 \begin{figure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_poro_acc.PNG}
   \caption{Inception-v3 trained on the Porosity class.}
-  \label{fig:alexinit_poro}
+  \label{fig:googinit_poro}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_dunham_acc.PNG}
   \caption{Inception-v3 trained on the Dunham class.}
-  \label{fig:alexinit_dunham}
+  \label{fig:googinit_dunham}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_drt_acc.PNG}
   \caption{Inception-v3 trained on the DRT class.}
-  \label{fig:alexinit_drt}
+  \label{fig:googinit_drt}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{figures/04-go_components_acc.PNG}
+  \includegraphics[width=.8\linewidth]{figures/04-go_conponents_acc.PNG}
   \caption{Inception-v3 trained on the Components class.}
-  \label{fig:alexinit_compo}
+  \label{fig:googinit_compo}
 \end{subfigure}
 \caption[Training and validation plots for Inception-v3]{The lines in green and red are for pretrained weights and yellow and blue for random initialization. The top plot is the validation accuracy for plots (a) (b) and (c) and the F1-score for plot (d), and the bottom plot is training  and validation loss.}
 \label{fig:plotsgoog}
@@ -310,10 +309,10 @@ On Table\ref{tab:googbest}, we summarize the best validation and test accuracy o
 \begin{tabular}[b]{| l | l | l | l | l |}
 \hline
     Initialization & Class & Validation accuracy (F1-score) & Test accuracy (F1-score) \ \\ \hline
-    Pretrained Weights & Dunham &  100\%  & 100\% \\ \hline
-    Pretrained Weights & Porosity & 100\%  &  100\% \\ \hline
-    Pretrained Weights &DRT & 100\% & 100\% \\ \hline
-    Pretrained Weights &Components & 100\% &  100\% \\ \hline
+    Pretrained Weights & Dunham &  90,1\%  & 66,2\% \\ \hline
+    Pretrained Weights & Porosity & 97,5\%  &  76,1\% \\ \hline
+    Pretrained Weights &DRT & 99,2\% & 53,7\% \\ \hline
+    Pretrained Weights &Components & 95,7\% &  44,6\% \\ \hline
 \end{tabular} 
 \end{table}
 
@@ -323,40 +322,54 @@ On Table\ref{tab:googbest}, we summarize the best validation and test accuracy o
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_baby_best.PNG}
   \caption{Best for Porosity}
-  \label{fig:rescm_poro}
+  \label{fig:googcm_poro}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_baby_pred.PNG}
   \caption{Predicted for Porosity}
-  \label{fig:rescmpred_poro}
+  \label{fig:googcmpred_poro}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_dunham_best.PNG}
   \caption{Best for Dunham}
-  \label{fig:rescm_dunham}
+  \label{fig:googcm_dunham}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_dunham_pred.PNG}
   \caption{Predicted for Dunham}
-  \label{fig:rescmpred_dunham}
+  \label{fig:googcmpred_dunham}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.8\linewidth]{figures/04-go_drt_best.PNG}
   \caption{Best for DRT}
-  \label{fig:rescm_drt}
+  \label{fig:googcm_drt}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{figures/04-go_predicted_drt.PNG}
+  \includegraphics[width=.8\linewidth]{figures/04-go_drt_pred.PNG}
   \caption{Predicted for DRT}
-  \label{fig:rescmpred_drt}
+  \label{fig:googcmpred_drt}
 \end{subfigure}
-\caption[Confusion matrices of classes trained on Inception-v3]{On the left is the confusion matrix of the best performing Inception-v3 and on the right is the confusion matrix on the test set. The last row contains the summaries of the performance for the multi-label classification.It shows precision, recall f1-score and also the number of samples for each class}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/04-go_compo_best.PNG}
+  \caption{Best for Components}
+  \label{fig:googcm_comp}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/04-go_compo_pred.PNG}
+  \caption{Predicted for Components}
+  \label{fig:googcmpred_comp}
+\end{subfigure}
+\caption[Confusion matrices of classes trained on Inception-v3]{On the left is the confusion matrix of the best performing Inception-v3 and on the right is the confusion matrix on the test set. The last row contains the summaries of the performance for the multi-label classification. It shows precision, recall f1-score and also the number of samples for each class}
 \label{fig:googcm}
 \end{figure}
-\fi
+
 \section{Optimizer}
+Based on the results of the previous experiment, we chose to optimize further Inception\_v3. 
+The first technique that we use is to train the network for 20 more epoch. 
